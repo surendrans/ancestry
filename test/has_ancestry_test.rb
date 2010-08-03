@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
 # Setup the required models for all test cases
+load_schema
 
 class TestNode < ActiveRecord::Base
   has_ancestry :cache_depth => true, :depth_cache_column => :depth_cache
@@ -24,8 +25,6 @@ class TestNodeSub2 < TestNode
 end
 
 class ActsAsTreeTest < ActiveSupport::TestCase
-  load_schema
-  
   def setup_test_nodes model, level, quantity
     model.delete_all
     create_test_nodes model, nil, level, quantity
