@@ -5,7 +5,7 @@ require 'test/unit'
 require File.expand_path(File.join(ENV['RAILS_ROOT'], 'config/environment.rb'))
 
 def load_schema
-  database_yml_path = File.join(RAILS_ROOT, 'config', 'database.yml')
+  database_yml_path = File.join(ENV['RAILS_ROOT'], 'config', 'database.yml')
   config = YAML::load(IO.read(database_yml_path))
   ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
   db_adapter = ENV['DB']
