@@ -204,24 +204,24 @@ class ActsAsTreeTest < ActiveSupport::TestCase
     roots = setup_test_nodes TestNode, 3, 3
 
     # Roots assertion
-    assert_equal roots.map(&:first), TestNode.roots.all
-    
+    assert_equal roots.map(&:first).to_a, TestNode.roots.all.to_a
+
     TestNode.all.each do |test_node|
       # Assertions for ancestors_of named scope
-      assert_equal test_node.ancestors, TestNode.ancestors_of(test_node)
-      assert_equal test_node.ancestors, TestNode.ancestors_of(test_node.id)
-      # Assertions for children_of named scope
-      assert_equal test_node.children, TestNode.children_of(test_node)
-      assert_equal test_node.children, TestNode.children_of(test_node.id)
-      # Assertions for descendants_of named scope
-      assert_equal test_node.descendants, TestNode.descendants_of(test_node)
-      assert_equal test_node.descendants, TestNode.descendants_of(test_node.id)
-      # Assertions for subtree_of named scope
-      assert_equal test_node.subtree, TestNode.subtree_of(test_node)
-      assert_equal test_node.subtree, TestNode.subtree_of(test_node.id)
-      # Assertions for siblings_of named scope
-      assert_equal test_node.siblings, TestNode.siblings_of(test_node)
-      assert_equal test_node.siblings, TestNode.siblings_of(test_node.id)
+      assert_equal test_node.ancestors.to_a, TestNode.ancestors_of(test_node).to_a
+      assert_equal test_node.ancestors.to_a, TestNode.ancestors_of(test_node.id).to_a
+      # Assertions for children_of named scope.to_a
+      assert_equal test_node.children.to_a, TestNode.children_of(test_node).to_a
+      assert_equal test_node.children.to_a, TestNode.children_of(test_node.id).to_a
+      # Assertions for descendants_of named scope.to_a
+      assert_equal test_node.descendants.to_a, TestNode.descendants_of(test_node).to_a
+      assert_equal test_node.descendants.to_a, TestNode.descendants_of(test_node.id).to_a
+      # Assertions for subtree_of named scope.to_a
+      assert_equal test_node.subtree.to_a, TestNode.subtree_of(test_node).to_a
+      assert_equal test_node.subtree.to_a, TestNode.subtree_of(test_node.id).to_a
+      # Assertions for siblings_of named scope.to_a
+      assert_equal test_node.siblings.to_a, TestNode.siblings_of(test_node).to_a
+      assert_equal test_node.siblings.to_a, TestNode.siblings_of(test_node.id).to_a
     end
   end
   
