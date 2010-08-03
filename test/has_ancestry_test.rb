@@ -228,12 +228,12 @@ class ActsAsTreeTest < ActiveSupport::TestCase
   def test_ancestroy_column_validation
     node = TestNode.create
     ['3', '10/2', '1/4/30', nil].each do |value|
-      node.write_attribute TestNode.ancestry_column, value
-      node.valid?; assert !node.errors.invalid?(TestNode.ancestry_column)
+      node.send(:write_attribute, TestNode.ancestry_column, value)
+      node.valid?; assert !node.errors[TestNode.ancestry_column].any?
     end
     ['1/3/', '/2/3', 'a', 'a/b', '-34', '/54'].each do |value|
-      node.write_attribute TestNode.ancestry_column, value
-      node.valid?; assert node.errors.invalid?(TestNode.ancestry_column)
+      node.send(:write_attribute, TestNode.ancestry_column, value)
+      node.valid?; assert node.errors[TestNode.ancestry_column].any?
     end
   end
   
